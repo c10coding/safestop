@@ -1,0 +1,4 @@
+name: SafeStop
+version: ${project.version}
+main: net.dohaw.safestop.SafeStop
+api-version: 1.16

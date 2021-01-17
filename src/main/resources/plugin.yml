@@ -1,11 +1,10 @@
 name: SafeStop
 version: ${project.version}
-main: net.dohaw.safestop.SafeStop
+main: reloc.ss.net.dohaw.safestop.SafeStop
 api-version: 1.16
 
 commands:
   safestop:
-    usage: Base Safestop command
     permission: safestop.use
     aliases:
       - safes

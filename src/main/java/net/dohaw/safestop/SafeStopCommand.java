@@ -14,9 +14,10 @@ public class SafeStopCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(args[0].equalsIgnoreCase("reload") && args.length == 1){
+        if(args[0].equalsIgnoreCase("reload") && args.length == 1 && sender.hasPermission("safestop.use")){
             plugin.getBConfig().reloadConfig();
             plugin.loadValues();
+            sender.sendMessage("The SafeStop config has been reloaded!");
         }else{
             sender.sendMessage("The only command this plugin has is /safestop reload!");
         }

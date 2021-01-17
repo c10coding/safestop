@@ -1,5 +1,5 @@
-Initial Startup Delay: 60
-Interval: 1
+Initial Startup Delay: 600
+Interval: 20
 Cutoff TPS: 5
-Cutoff Ram: 6144
+Cutoff Ram: 25000
 Message: The server is restarting in %num% seconds!

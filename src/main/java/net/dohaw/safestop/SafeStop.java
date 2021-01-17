@@ -3,9 +3,12 @@ package net.dohaw.safestop;
 import lombok.Getter;
 import net.dohaw.corelib.CoreLib;
 import net.dohaw.corelib.JPUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SafeStop extends JavaPlugin {
+
+    private int count = 60;
 
     @Getter BaseConfig bConfig;
 
@@ -23,6 +26,7 @@ public final class SafeStop extends JavaPlugin {
         getLogger().info("The bConfig values are loaded!");
         new SafeStopRunnable(this).runTaskTimer(this, delay, interval);
         startTPSChecker();
+        JPUtils.registerCommand("safestop", new SafeStopCommand(this));
     }
 
     @Override
@@ -37,7 +41,6 @@ public final class SafeStop extends JavaPlugin {
         this.cutoffRam = bConfig.getCutoffRam();
         this.message = bConfig.getMessage();
     }
-
 
     private void startTPSChecker(){
 
@@ -73,6 +76,22 @@ public final class SafeStop extends JavaPlugin {
             }
 
         }, 0, 1); // do not change the "1" value, the other one is just initial delay, I recommend 0 = start instantly.
+
+    }
+
+    public void restart(){
+        Bukkit.getScheduler().runTaskTimer(this, () -> {
+            if(count % 10 == 0){
+                String msg = message.replace("%num%", String.valueOf(count));
+                Bukkit.broadcastMessage(msg);
+            }
+            count--;
+
+            if(count <= 0){
+                this.getServer().dispatchCommand(this.getServer().getConsoleSender(), "restart");
+            }
+
+        }, 0, 20);
 
     }
 

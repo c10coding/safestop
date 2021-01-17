@@ -2,3 +2,17 @@ name: SafeStop
 version: ${project.version}
 main: net.dohaw.safestop.SafeStop
 api-version: 1.16
+
+commands:
+  safestop:
+    usage: Base Safestop command
+    permission: safestop.use
+    aliases:
+      - safes
+      - sstop
+      - ssto
+      - safestop
+
+permissions:
+  safestop.use:
+    default: op
